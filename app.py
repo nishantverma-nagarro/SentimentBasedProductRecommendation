@@ -42,13 +42,8 @@ def getResults(user):
     senti_score = senti_score.sort_values(by='percent',ascending=False)
     return('Top 5 recommended products {}'.format(senti_score['name'].head().tolist()))
 
-@app.route("/")
+@app.route("/", methods=['POST','GET'])
 def home():
-    return render_template("index.html")
-
-
-@app.route("/predict", methods=['POST','GET'])
-def predict():
     if (request.method == 'POST'):
         app.logger.info("Selected user: " + request.form['UserID'])
         user = request.form['UserID']
